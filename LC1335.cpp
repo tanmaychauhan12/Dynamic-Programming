@@ -5,14 +5,14 @@ class Solution{
 public:
     int solve(vector<int> &jobDifficulty, vector<vector<int>> &dp, int idx, int d){
         if(idx >= jobDifficulty.size()) return 0;
+        if(dp[idx][d] != -1) return dp[idx][d];
         if(d == 1){
             int maxEl = jobDifficulty[idx];
             for(int i=idx;i<jobDifficulty.size();i++){
                 maxEl = max(maxEl, jobDifficulty[i]);
             }
-            return maxEl;
+            return dp[idx][d] = maxEl;
         }
-        if(dp[idx][d] != -1) return dp[idx][d];
         int maxEl = jobDifficulty[idx];
         int finalResult = INT_MAX;
         for(int i=idx;i<=jobDifficulty.size()-d;i++){
